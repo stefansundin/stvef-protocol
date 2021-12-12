@@ -1,0 +1,10 @@
+[Desktop Entry]
+Version=1.0
+Name=Star Trek Voyager: Elite Force Holomatch
+Comment=Opens stvef protocol links
+Exec=stvef-protocol %u
+TryExec=stvef-protocol
+Terminal=true
+Type=Application
+MimeType=x-scheme-handler/stvef;
+NoDisplay=true

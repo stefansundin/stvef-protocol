@@ -1,0 +1,35 @@
+#!/bin/bash
+
+ELITE_FORCE_EXECUTABLE="$HOME/.wine/drive_c/Program Files (x86)/Raven/Star Trek Voyager Elite Force/stvoyHM.exe"
+
+if [[ ! -e "$ELITE_FORCE_EXECUTABLE" ]]; then
+  echo "Could not find executable at $ELITE_FORCE_EXECUTABLE"
+  echo "Please edit $0 and update the path."
+  read
+  exit 1
+fi
+
+if [[ "$1" != "stvef:"* ]]; then
+  echo "Argument not recognized."
+  read
+  exit 1
+fi
+
+arg=${1:6}
+
+# Example arg: 74.91.116.133;27961;BeerGardenSuperFFAv;hm_noon;0;
+
+IFS=';' read -r SERVER_IP SERVER_PORT SERVER_NAME MAP_NAME REST <<< "$arg"
+
+echo "Server: $SERVER_NAME"
+echo "Map: $MAP_NAME"
+echo "Host: $SERVER_IP:$SERVER_PORT"
+echo
+echo "Press the enter key to run:"
+echo "exec wine \"$ELITE_FORCE_EXECUTABLE\" +CONNECT \"$SERVER_IP:$SERVER_PORT\""
+
+read
+
+echo
+cd "$(dirname "$ELITE_FORCE_EXECUTABLE")"
+exec wine "$ELITE_FORCE_EXECUTABLE" +CONNECT "$SERVER_IP:$SERVER_PORT"
