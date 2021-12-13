@@ -1,5 +1,15 @@
-The script assumes the game is installed to `$HOME/.wine/drive_c/Program Files (x86)/Raven/Star Trek Voyager Elite Force/stvoyHM.exe`. Edit `stvef-protocol` if it is located elsewhere.
+## Install holomatch
 
+Download a release from one of:
+- https://github.com/Daggolin/tulip-voyager
+- https://github.com/zturtleman/lilium-voyager
+- https://holomat.ch/
+
+The download from `holomat.ch` includes all of the necessary files. For the other versions you need to copy over a `baseEF` directory from somewhere else.
+
+## Install stvef-protocol
+
+The [`stvef-protocol`](stvef-protocol) script makes some assumption regarding where the game is installed. Edit the script if the game is located elsewhere.
 
 Install using curl:
 ```
@@ -10,7 +20,7 @@ xdg-desktop-menu install stvef-protocol.desktop
 rm stvef-protocol.desktop
 ```
 
-Alternative install by cloning repository:
+Install by cloning repository:
 ```shell
 git clone https://github.com/stefansundin/stvef-protocol.git
 cd stvef-protocol/linux

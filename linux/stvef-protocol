@@ -1,9 +1,18 @@
 #!/bin/bash
 
-ELITE_FORCE_EXECUTABLE="$HOME/.wine/drive_c/Program Files (x86)/Raven/Star Trek Voyager Elite Force/stvoyHM.exe"
-
-if [[ ! -e "$ELITE_FORCE_EXECUTABLE" ]]; then
-  echo "Could not find executable at $ELITE_FORCE_EXECUTABLE"
+if [[ -x "$HOME/Downloads/stvoyHM_Linux/Star Trek Voyager Elite Force Holomatch/cMod-stvoyHM.x86_64" ]]; then
+  EXECUTABLE="$HOME/Downloads/stvoyHM_Linux/Star Trek Voyager Elite Force Holomatch/cMod-stvoyHM.x86_64"
+elif [[ -x "$HOME/Downloads/release-linux-x86_64/tulipvoyhm.x86_64" ]]; then
+  EXECUTABLE="$HOME/Downloads/release-linux-x86_64/tulipvoyhm.x86_64"
+elif [[ -x "$HOME/Downloads/liliumvoyager-1.40-linux/liliumvoyhm.x86_64" ]]; then
+  EXECUTABLE="$HOME/Downloads/liliumvoyager-1.40-linux/liliumvoyhm.x86_64"
+elif [[ -x "$HOME/Downloads/ioEF-cMod_v1.17_linux_x86_64/ioEF-cMod.x86_64" ]]; then
+  EXECUTABLE="$HOME/Downloads/ioEF-cMod_v1.17_linux_x86_64/ioEF-cMod.x86_64"
+elif [[ -x "$HOME/.wine/drive_c/Program Files (x86)/Raven/Star Trek Voyager Elite Force/stvoyHM.exe" ]]; then
+  EXECUTABLE="$HOME/.wine/drive_c/Program Files (x86)/Raven/Star Trek Voyager Elite Force/stvoyHM.exe"
+  RUNNER=wine
+else
+  echo "Could not find holomatch executable."
   echo "Please edit $0 and update the path."
   read
   exit 1
@@ -26,10 +35,10 @@ echo "Map: $MAP_NAME"
 echo "Host: $SERVER_IP:$SERVER_PORT"
 echo
 echo "Press the enter key to run:"
-echo "exec wine \"$ELITE_FORCE_EXECUTABLE\" +CONNECT \"$SERVER_IP:$SERVER_PORT\""
+echo "\"$EXECUTABLE\" +CONNECT \"$SERVER_IP:$SERVER_PORT\""
 
 read
 
 echo
-cd "$(dirname "$ELITE_FORCE_EXECUTABLE")"
-exec wine "$ELITE_FORCE_EXECUTABLE" +CONNECT "$SERVER_IP:$SERVER_PORT"
+cd "$(dirname "$EXECUTABLE")"
+exec $RUNNER "$EXECUTABLE" +CONNECT "$SERVER_IP:$SERVER_PORT"
