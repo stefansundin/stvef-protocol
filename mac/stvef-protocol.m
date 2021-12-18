@@ -36,7 +36,7 @@
               defaultButton:nil
               alternateButton:nil
               otherButton:nil
-              informativeTextWithFormat:@"Supported:\nLilium Voyager.app\nTulip Voyager.app"] runModal];
+              informativeTextWithFormat:@"Supported:\nLilium Voyager.app\nTulip Voyager.app\n\nYou must move the app to /Applications/"] runModal];
   }
 
   // Close this program
