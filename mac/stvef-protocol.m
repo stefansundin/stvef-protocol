@@ -16,11 +16,11 @@
 
   // Find Holomatch app
   NSURL *app;
-  if ([[NSFileManager defaultManager] fileExistsAtPath:@"/Applications/Lilium Voyager.app"]) {
-    app = [NSURL fileURLWithPath:@"/Applications/Lilium Voyager.app"];
-  }
-  else if ([[NSFileManager defaultManager] fileExistsAtPath:@"/Applications/Tulip Voyager.app"]) {
+  if ([[NSFileManager defaultManager] fileExistsAtPath:@"/Applications/Tulip Voyager.app"]) {
     app = [NSURL fileURLWithPath:@"/Applications/Tulip Voyager.app"];
+  }
+  else if ([[NSFileManager defaultManager] fileExistsAtPath:@"/Applications/Lilium Voyager.app"]) {
+    app = [NSURL fileURLWithPath:@"/Applications/Lilium Voyager.app"];
   }
 
   // Launch app
