@@ -17,6 +17,7 @@ REM     If you want to specify the executable, edit the 'SET' line above and rem
     SET "EF_EXE_5=%~dp0tulipvoyhm.x86_64.exe"
     SET "EF_EXE_6=%~dp0ioEF-cMod.x86.exe"
     SET "EF_EXE_7=%~dp0ioEF-cMod.x86_64.exe"
+    SET "EF_EXE_8=%~dp0cMod-stvoyHM.exe"
     
 
     IF EXIST "%EF_EXE_1%" (SET "ELITE_FORCE_EXECUTABLE=%EF_EXE_1%")
@@ -26,6 +27,7 @@ REM     If you want to specify the executable, edit the 'SET' line above and rem
     IF EXIST "%EF_EXE_5%" (SET "ELITE_FORCE_EXECUTABLE=%EF_EXE_5%") 
     IF EXIST "%EF_EXE_6%" (SET "ELITE_FORCE_EXECUTABLE=%EF_EXE_6%") 
     IF EXIST "%EF_EXE_7%" (SET "ELITE_FORCE_EXECUTABLE=%EF_EXE_7%")
+    IF EXIST "%EF_EXE_8%" (SET "ELITE_FORCE_EXECUTABLE=%EF_EXE_8%")
 
 IF NOT EXIST "%ELITE_FORCE_EXECUTABLE%" (GOTO ERROR_NO_EF_IN_FOLDER) 
 REM ----------------------------------------------------------------------------------------------------------------------------------------
