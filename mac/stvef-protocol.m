@@ -7,12 +7,26 @@
 @implementation AppDelegate
 
 - (void)handleAppleEvent:(NSAppleEventDescriptor *)event withReplyEvent: (NSAppleEventDescriptor *)replyEvent {
-  // Parse URL
+  // Get input data
+  NSString *input = [[event paramDescriptorForKeyword:keyDirectObject] stringValue];
+  NSString *arg;
+  if ([input hasPrefix:@"stvef://"]) {
+    arg = [input substringFromIndex:8];
+  }
+  else if ([input hasPrefix:@"stvef:"]) {
+    arg = [input substringFromIndex:6];
+  }
+  else {
+    // invalid input
+    [NSApp terminate:nil];
+    return;
+  }
+
+  // Parse arg
   // TODO: Maybe validate the input a bit better
-  NSString *fullUrl = [[event paramDescriptorForKeyword:keyDirectObject] stringValue];
-  NSString *arg = [fullUrl substringWithRange:NSMakeRange(6, [fullUrl length]-6)];
   NSArray *args = [arg componentsSeparatedByString:@";"];
   NSString *server = [NSString stringWithFormat: @"%@:%@", args[0], args[1]];
+  NSArray *arguments = [NSArray arrayWithObjects: @"+CONNECT", server, nil];
 
   // Find Holomatch app
   NSURL *app;
@@ -22,22 +36,21 @@
   else if ([[NSFileManager defaultManager] fileExistsAtPath:@"/Applications/Lilium Voyager.app"]) {
     app = [NSURL fileURLWithPath:@"/Applications/Lilium Voyager.app"];
   }
-
-  // Launch app
-  if (app) {
-    NSArray *arguments = [NSArray arrayWithObjects: @"+CONNECT", server, nil];
-    NSMutableDictionary *config = [[NSMutableDictionary alloc] init];
-    [config setObject:arguments forKey:NSWorkspaceLaunchConfigurationArguments];
-    NSWorkspace *ws = [NSWorkspace sharedWorkspace];
-    [ws launchApplicationAtURL:app options:NSWorkspaceLaunchNewInstance configuration:config error:nil];
-  }
   else {
     [[NSAlert alertWithMessageText:@"Error: Could not find supported holomatch app."
               defaultButton:nil
               alternateButton:nil
               otherButton:nil
               informativeTextWithFormat:@"Supported:\nLilium Voyager.app\nTulip Voyager.app\n\nYou must move the app to /Applications/"] runModal];
+    [NSApp terminate:nil];
+    return;
   }
+
+  // Launch app
+  NSMutableDictionary *config = [[NSMutableDictionary alloc] init];
+  [config setObject:arguments forKey:NSWorkspaceLaunchConfigurationArguments];
+  NSWorkspace *ws = [NSWorkspace sharedWorkspace];
+  [ws launchApplicationAtURL:app options:NSWorkspaceLaunchNewInstance configuration:config error:nil];
 
   // Close this program
   [NSApp terminate:nil];
@@ -55,13 +68,6 @@ int main() {
                                andSelector:@selector(handleAppleEvent:withReplyEvent:)
                              forEventClass:kInternetEventClass
                                 andEventID:kAEGetURL];
-
-  // Guess we need a window..
-  NSWindow *window = [NSWindow alloc];
-  [window initWithContentRect:NSMakeRect(0, 0, 200, 200)
-                    styleMask:NSWindowStyleMaskTitled
-                      backing:NSBackingStoreBuffered
-                        defer:NO];
 
   [NSApp run];
   return 0;
