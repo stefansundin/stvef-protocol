@@ -13,9 +13,9 @@ The [`stvef-protocol`](stvef-protocol) script makes some assumption regarding wh
 
 Install using curl:
 ```
-sudo curl -L -o /usr/local/bin/stvef-protocol https://github.com/stefansundin/stvef-protocol/raw/master/linux/stvef-protocol
+sudo curl -L -o /usr/local/bin/stvef-protocol https://github.com/stefansundin/stvef-protocol/raw/main/linux/stvef-protocol
 sudo chmod +x /usr/local/bin/stvef-protocol
-curl -L -o stvef-protocol.desktop https://github.com/stefansundin/stvef-protocol/raw/master/linux/stvef-protocol.desktop
+curl -L -o stvef-protocol.desktop https://github.com/stefansundin/stvef-protocol/raw/main/linux/stvef-protocol.desktop
 xdg-desktop-menu install stvef-protocol.desktop
 rm stvef-protocol.desktop
 ```
