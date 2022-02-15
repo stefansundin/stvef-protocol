@@ -56,6 +56,11 @@
   [NSApp terminate:nil];
 }
 
+- (void)applicationDidFinishLaunching:(NSNotification *)notification {
+  // Close this program if it wasn't launched using a link (i.e. launched normally)
+  [NSApp terminate:nil];
+}
+
 @end
 
 int main() {
@@ -69,6 +74,7 @@ int main() {
                              forEventClass:kInternetEventClass
                                 andEventID:kAEGetURL];
 
+  [NSApp setDelegate:appDelegate];
   [NSApp run];
   return 0;
 }
