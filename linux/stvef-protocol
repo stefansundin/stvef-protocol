@@ -18,27 +18,33 @@ else
   exit 1
 fi
 
-if [[ "$1" != "stvef:"* ]]; then
+if [[ "$1" == "stvef://"* ]]; then
+  arg="${1:8}"
+elif [[ "$1" == "stvef:"* ]]; then
+  arg="${1:6}"
+else
   echo "Argument not recognized."
   read
   exit 1
 fi
 
-arg=${1:6}
+if [[ "$arg" == "connect/"* ]]; then
+  SERVER="${arg:8}"
+else
+  # Example arg: 74.91.116.133;27961;BeerGardenSuperFFAv;hm_noon;0;
+  IFS=';' read -r SERVER_IP SERVER_PORT SERVER_NAME MAP_NAME REST <<< "$arg"
+  SERVER="$SERVER_IP:$SERVER_PORT"
+  echo "Server: $SERVER_NAME"
+  echo "Map: $MAP_NAME"
+  echo "Host: $SERVER"
+  echo
+fi
 
-# Example arg: 74.91.116.133;27961;BeerGardenSuperFFAv;hm_noon;0;
-
-IFS=';' read -r SERVER_IP SERVER_PORT SERVER_NAME MAP_NAME REST <<< "$arg"
-
-echo "Server: $SERVER_NAME"
-echo "Map: $MAP_NAME"
-echo "Host: $SERVER_IP:$SERVER_PORT"
-echo
 echo "Press the enter key to run:"
-echo "\"$EXECUTABLE\" +CONNECT \"$SERVER_IP:$SERVER_PORT\""
+echo "\"$EXECUTABLE\" +CONNECT \"$SERVER\""
 
 read
 
 echo
 cd "$(dirname "$EXECUTABLE")"
-exec $RUNNER "$EXECUTABLE" +CONNECT "$SERVER_IP:$SERVER_PORT"
+exec $RUNNER "$EXECUTABLE" +CONNECT "$SERVER"

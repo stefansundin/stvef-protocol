@@ -24,8 +24,14 @@
 
   // Parse arg
   // TODO: Maybe validate the input a bit better
-  NSArray *args = [arg componentsSeparatedByString:@";"];
-  NSString *server = [NSString stringWithFormat: @"%@:%@", args[0], args[1]];
+  NSString *server;
+  if ([arg hasPrefix:@"connect/"]) {
+    server = [arg substringFromIndex:8];
+  }
+  else {
+    NSArray *args = [arg componentsSeparatedByString:@";"];
+    server = [NSString stringWithFormat: @"%@:%@", args[0], args[1]];
+  }
   NSArray *arguments = [NSArray arrayWithObjects: @"+CONNECT", server, nil];
 
   // Find Holomatch app
