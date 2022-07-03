@@ -33,3 +33,9 @@ cd stvef-protocol/linux
 sudo cp stvef-protocol /usr/local/bin/
 xdg-desktop-menu install stvef-protocol.desktop
 ```
+
+Uninstall:
+```shell
+xdg-desktop-menu uninstall stvef-protocol.desktop
+sudo rm /usr/local/bin/stvef-protocol
+```
