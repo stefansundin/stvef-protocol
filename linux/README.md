@@ -7,6 +7,12 @@ Download a release from one of:
 
 The download from `holomat.ch` includes all of the necessary files. For the other versions you need to copy over a `baseEF` directory from somewhere else.
 
+If you use Wine to install the Windows executable from holomat.ch, then you need:
+
+```
+winetricks vcrun2015
+```
+
 ## Install stvef-protocol
 
 The [`stvef-protocol`](stvef-protocol) script makes some assumption regarding where the game is installed. Edit the script if the game is located elsewhere.
