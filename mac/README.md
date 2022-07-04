@@ -12,9 +12,15 @@ Note that in Tulip Voyager, the key combination to bring up the console is <kbd>
 
 ## Install stvef-protocol
 
+[You can download the app from the releases section.](https://github.com/stefansundin/stvef-protocol/releases/latest)
+
+## Build stvef-protocol from source
+
 To build and install, run:
 
 ```
+git clone https://github.com/stefansundin/stvef-protocol.git
+cd stvef-protocol/mac
 ./build.sh
 cp -r stvef-protocol-app/ /Applications/stvef-protocol.app
 ```
