@@ -42,12 +42,15 @@
   else if ([[NSFileManager defaultManager] fileExistsAtPath:@"/Applications/Lilium Voyager.app"]) {
     app = [NSURL fileURLWithPath:@"/Applications/Lilium Voyager.app"];
   }
+  else if ([[NSFileManager defaultManager] fileExistsAtPath:@"/Applications/cMod-stvoyHM.app"]) {
+    app = [NSURL fileURLWithPath:@"/Applications/cMod-stvoyHM.app"];
+  }
   else {
     [[NSAlert alertWithMessageText:@"Error: Could not find supported holomatch app."
               defaultButton:nil
               alternateButton:nil
               otherButton:nil
-              informativeTextWithFormat:@"Supported:\nLilium Voyager.app\nTulip Voyager.app\n\nYou must move the app to /Applications/"] runModal];
+              informativeTextWithFormat:@"Supported:\nLilium Voyager.app\nTulip Voyager.app\ncMod-stvoyHM.app\n\nYou must move the app to /Applications/"] runModal];
     [NSApp terminate:nil];
     return;
   }
