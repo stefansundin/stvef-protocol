@@ -7,6 +7,13 @@
 @implementation AppDelegate
 
 - (void)handleAppleEvent:(NSAppleEventDescriptor *)event withReplyEvent: (NSAppleEventDescriptor *)replyEvent {
+  // List of supported apps. To support a new app just it here and build from source.
+  const NSArray *APPS = [NSArray arrayWithObjects:
+    @"Tulip Voyager.app",
+    @"Lilium Voyager.app",
+    @"cMod-stvoyHM.app",
+  nil];
+
   // Get input data
   NSString *input = [[event paramDescriptorForKeyword:keyDirectObject] stringValue];
   NSString *arg;
@@ -35,22 +42,20 @@
   NSArray *arguments = [NSArray arrayWithObjects: @"+CONNECT", server, nil];
 
   // Find Holomatch app
-  NSURL *app;
-  if ([[NSFileManager defaultManager] fileExistsAtPath:@"/Applications/Tulip Voyager.app"]) {
-    app = [NSURL fileURLWithPath:@"/Applications/Tulip Voyager.app"];
+  NSURL *app = nil;
+  for (id appname in APPS) {
+    NSString *path = [NSString stringWithFormat: @"/Applications/%@", appname];
+    if ([[NSFileManager defaultManager] fileExistsAtPath:path]) {
+      app = [NSURL fileURLWithPath:path];
+    }
   }
-  else if ([[NSFileManager defaultManager] fileExistsAtPath:@"/Applications/Lilium Voyager.app"]) {
-    app = [NSURL fileURLWithPath:@"/Applications/Lilium Voyager.app"];
-  }
-  else if ([[NSFileManager defaultManager] fileExistsAtPath:@"/Applications/cMod-stvoyHM.app"]) {
-    app = [NSURL fileURLWithPath:@"/Applications/cMod-stvoyHM.app"];
-  }
-  else {
-    [[NSAlert alertWithMessageText:@"Error: Could not find supported holomatch app."
+
+  if (app == nil) {
+    [[NSAlert alertWithMessageText:@"Error: Could not find a supported holomatch app."
               defaultButton:nil
               alternateButton:nil
               otherButton:nil
-              informativeTextWithFormat:@"Supported:\nLilium Voyager.app\nTulip Voyager.app\ncMod-stvoyHM.app\n\nYou must move the app to /Applications/"] runModal];
+              informativeTextWithFormat:@"Supported apps:\n\n%@\n\nYou must move the app to /Applications/", [APPS componentsJoinedByString:@"\n"]] runModal];
     [NSApp terminate:nil];
     return;
   }
