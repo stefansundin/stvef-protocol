@@ -10,16 +10,17 @@ SET ELITE_FORCE_EXECUTABLE=%~dp0stvoyhm.exe
 
 REM     The last executable in this list (that exists in the same folder as this batch file) is the one that will be loaded
 REM     If you want to specify the executable, edit the 'SET' line above and remove all the indented 'SET' and 'IF' lines in the block below 
+    SET "EF_EXE_0=%~dp0stvoyhm.exe"
     SET "EF_EXE_1=%~dp0iostvoyHM.x86.exe"
     SET "EF_EXE_2=%~dp0iostvoyHM.x86_64.exe"
     SET "EF_EXE_3=%~dp0liliumvoyhm.x86.exe"
     SET "EF_EXE_4=%~dp0liliumvoyhm.x86_64.exe"
     SET "EF_EXE_5=%~dp0tulipvoyhm.x86_64.exe"
-    SET "EF_EXE_6=%~dp0ioEF-cMod.x86.exe"
-    SET "EF_EXE_7=%~dp0ioEF-cMod.x86_64.exe"
-    SET "EF_EXE_8=%~dp0cMod-stvoyHM.exe"
+    SET "EF_EXE_6=%~dp0cMod-stvoyHM.exe" 
+    SET "EF_EXE_7=%~dp0ioEF-cMod.x86.exe"
+    SET "EF_EXE_8=%~dp0ioEF-cMod.x86_64.exe"
     
-
+    IF EXIST "%EF_EXE_0%" (SET "ELITE_FORCE_EXECUTABLE=%EF_EXE_0%")
     IF EXIST "%EF_EXE_1%" (SET "ELITE_FORCE_EXECUTABLE=%EF_EXE_1%")
     IF EXIST "%EF_EXE_2%" (SET "ELITE_FORCE_EXECUTABLE=%EF_EXE_2%") 
     IF EXIST "%EF_EXE_3%" (SET "ELITE_FORCE_EXECUTABLE=%EF_EXE_3%") 
@@ -66,6 +67,8 @@ REM GOTO SKIP_PAUSE
         SET "SERVER_NAME=!SERVER_NAME:%%7D=}!"
         SET "SERVER_NAME=!SERVER_NAME:%%3C=^<!"
         SET "SERVER_NAME=!SERVER_NAME:%%7C=^|!"
+        ECHO [95m URI string: %ARGUMENTS%
+        ECHO 
         ECHO [92m Joining %SERVER_NAME%  Map:   %MAP_NAME% [0m
         ECHO 
         ECHO [93m PRESS ANY KEY TO JOIN
@@ -76,7 +79,7 @@ REM GOTO SKIP_PAUSE
 :SKIP_PAUSE
 REM *****************************************************************************************************************************************
 REM     This starts EF with the CONNECT command with the selected server IP and Port
-    START "" /D "%~dp0 " "%ELITE_FORCE_EXECUTABLE%" +CONNECT %SERVER_IP%:%SERVER_PORT%
+    START "" /D "%~dp0 " "%ELITE_FORCE_EXECUTABLE%"  +set logfile 2 +CONNECT %SERVER_IP%:%SERVER_PORT%
 EXIT 0
 REM *****************************************************************************************************************************************
 
