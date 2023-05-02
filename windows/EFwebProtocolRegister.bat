@@ -68,7 +68,7 @@ REG ADD "HKCU\Software\Classes\stvef\shell\open\command"        /t REG_SZ /d "\"
 
 ECHO.
 ECHO [93m:::
-ECHO ::: If you saw five successful operations above then that
+ECHO ::: If you see five successful operations above then that
 ECHO ::: means that the URI protocol was registered successfully.
 ECHO :::
 ECHO ::: Now open https://efservers.com and join a server.
