@@ -68,11 +68,11 @@ REM GOTO SKIP_PAUSE
         SET "SERVER_NAME=!SERVER_NAME:%%3C=^<!"
         SET "SERVER_NAME=!SERVER_NAME:%%7C=^|!"
         ECHO [95m URI string: %ARGUMENTS%
-        ECHO 
+        ECHO.
         ECHO [92m Joining %SERVER_NAME%  Map:   %MAP_NAME% [0m
-        ECHO 
+        ECHO.
         ECHO [93m PRESS ANY KEY TO JOIN
-        ECHO 
+        ECHO.
         PAUSE
     REM ----------------------------------------------------------------------------------------------------------------------------------------
 
