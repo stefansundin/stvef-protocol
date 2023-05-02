@@ -1,4 +1,6 @@
 @ECHO OFF
+SETLOCAL ENABLEDELAYEDEXPANSION
+
 REM     This Script will allow you to connect to Elite Force servers by clicking on the 'Join' buttons on https://efservers.com
 REM ----------------------------------------------------------------------------------------------------------------------------------------
 REM     This code decides which game EXE to use (%EF_EXE%), order of preference is cmod, lilium, ioef, fallback to stvoyHM.exe
@@ -47,8 +49,17 @@ REM     Then the information for joining the chosen server is extracted from the
 REM     and put in a format that the Elite Force executable can understand
 
 SET ARGUMENTS=%1
-SET "ARGUMENTS=%ARGUMENTS:stvef:=%"
-FOR /f "tokens=1,2,3,4 delims=; " %%a IN ("%ARGUMENTS%") DO SET "SERVER_IP=%%a"&SET "SERVER_PORT=%%b"&SET "SERVER_NAME=%%c"&SET "MAP_NAME=%%d"
+SET ARGUMENTS=%ARGUMENTS:stvef:=%
+SET ARGUMENTS=%ARGUMENTS:"=%
+IF "%ARGUMENTS:~0,2%"=="//" SET ARGUMENTS=%ARGUMENTS:~2%
+IF "%ARGUMENTS:~0,8%"=="connect/" (
+  REM This is the new URI format from https://github.com/ioquake/ioq3/commit/31c6d2f9d502868970ccbe62d7cef36206cbc8b1
+  SET HOST=%ARGUMENTS:~8%
+  GOTO SKIP_PAUSE
+) ELSE (
+  FOR /f "tokens=1,2,3,4 delims=; " %%a IN ("%ARGUMENTS%") DO SET "SERVER_IP=%%a"&SET "SERVER_PORT=%%b"&SET "SERVER_NAME=%%c"&SET "MAP_NAME=%%d"
+  SET HOST=!SERVER_IP!:!SERVER_PORT!
+)
 
     REM ----------------------------------------------------------------------------------------------------------------------------------------
     REM     THIS BLOCK IS OPTIONAL - Pauses the script before launching the game, while displaying the
@@ -60,7 +71,6 @@ REM GOTO SKIP_PAUSE
 
         GOTO SHOW_LOGO
         :PAUSE_BEFORE_LAUNCH
-        SETLOCAL ENABLEDELAYEDEXPANSION
         SET "SERVER_NAME=!SERVER_NAME:%%20= !"
         SET "SERVER_NAME=!SERVER_NAME:%%5C=\!"
         SET "SERVER_NAME=!SERVER_NAME:%%7B={!"
@@ -79,7 +89,7 @@ REM GOTO SKIP_PAUSE
 :SKIP_PAUSE
 REM *****************************************************************************************************************************************
 REM     This starts EF with the CONNECT command with the selected server IP and Port
-    START "" /D "%~dp0 " "%ELITE_FORCE_EXECUTABLE%" +set logfile 2 +CONNECT %SERVER_IP%:%SERVER_PORT%
+    START "" /D "%~dp0 " "%ELITE_FORCE_EXECUTABLE%" +set logfile 2 +CONNECT %HOST%
 EXIT 0
 REM *****************************************************************************************************************************************
 
@@ -122,7 +132,7 @@ GOTO PAUSE_BEFORE_LAUNCH
 :::[93m
 :::        .^.
 ::: .-----'   `-----.   Star Trek Voyager: Elite Force
-::: | [##'     `##] |   Web-connector Script v0.9
+::: | [##'     `##] |   Web-connector Script v1.0
 ::: `---'   __  `---'   From efservers.com
 :::    | .-'  `. |      Join a game directly from
 :::    |'       `|      The website/webapp!
