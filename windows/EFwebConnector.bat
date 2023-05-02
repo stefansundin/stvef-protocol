@@ -9,28 +9,28 @@ REM ----------------------------------------------------------------------------
 SET ELITE_FORCE_EXECUTABLE=%~dp0stvoyhm.exe
 
 REM     The last executable in this list (that exists in the same folder as this batch file) is the one that will be loaded
-REM     If you want to specify the executable, edit the 'SET' line above and remove all the indented 'SET' and 'IF' lines in the block below 
+REM     If you want to specify the executable, edit the 'SET' line above and remove all the indented 'SET' and 'IF' lines in the block below
     SET "EF_EXE_0=%~dp0stvoyhm.exe"
     SET "EF_EXE_1=%~dp0iostvoyHM.x86.exe"
     SET "EF_EXE_2=%~dp0iostvoyHM.x86_64.exe"
     SET "EF_EXE_3=%~dp0liliumvoyhm.x86.exe"
     SET "EF_EXE_4=%~dp0liliumvoyhm.x86_64.exe"
     SET "EF_EXE_5=%~dp0tulipvoyhm.x86_64.exe"
-    SET "EF_EXE_6=%~dp0cMod-stvoyHM.exe" 
+    SET "EF_EXE_6=%~dp0cMod-stvoyHM.exe"
     SET "EF_EXE_7=%~dp0ioEF-cMod.x86.exe"
     SET "EF_EXE_8=%~dp0ioEF-cMod.x86_64.exe"
-    
+
     IF EXIST "%EF_EXE_0%" (SET "ELITE_FORCE_EXECUTABLE=%EF_EXE_0%")
     IF EXIST "%EF_EXE_1%" (SET "ELITE_FORCE_EXECUTABLE=%EF_EXE_1%")
-    IF EXIST "%EF_EXE_2%" (SET "ELITE_FORCE_EXECUTABLE=%EF_EXE_2%") 
-    IF EXIST "%EF_EXE_3%" (SET "ELITE_FORCE_EXECUTABLE=%EF_EXE_3%") 
-    IF EXIST "%EF_EXE_4%" (SET "ELITE_FORCE_EXECUTABLE=%EF_EXE_4%") 
-    IF EXIST "%EF_EXE_5%" (SET "ELITE_FORCE_EXECUTABLE=%EF_EXE_5%") 
-    IF EXIST "%EF_EXE_6%" (SET "ELITE_FORCE_EXECUTABLE=%EF_EXE_6%") 
+    IF EXIST "%EF_EXE_2%" (SET "ELITE_FORCE_EXECUTABLE=%EF_EXE_2%")
+    IF EXIST "%EF_EXE_3%" (SET "ELITE_FORCE_EXECUTABLE=%EF_EXE_3%")
+    IF EXIST "%EF_EXE_4%" (SET "ELITE_FORCE_EXECUTABLE=%EF_EXE_4%")
+    IF EXIST "%EF_EXE_5%" (SET "ELITE_FORCE_EXECUTABLE=%EF_EXE_5%")
+    IF EXIST "%EF_EXE_6%" (SET "ELITE_FORCE_EXECUTABLE=%EF_EXE_6%")
     IF EXIST "%EF_EXE_7%" (SET "ELITE_FORCE_EXECUTABLE=%EF_EXE_7%")
     IF EXIST "%EF_EXE_8%" (SET "ELITE_FORCE_EXECUTABLE=%EF_EXE_8%")
 
-IF NOT EXIST "%ELITE_FORCE_EXECUTABLE%" (GOTO ERROR_NO_EF_IN_FOLDER) 
+IF NOT EXIST "%ELITE_FORCE_EXECUTABLE%" (GOTO ERROR_NO_EF_IN_FOLDER)
 REM ----------------------------------------------------------------------------------------------------------------------------------------
 
     REM ----------------------------------------------------------------------------------------------------------------------------------------
@@ -45,7 +45,7 @@ REM ****************************************************************************
 REM     If this file was loaded by the URI Handler (You clicked 'Join' on efservers.com)
 REM     Then the information for joining the chosen server is extracted from the passed aruments
 REM     and put in a format that the Elite Force executable can understand
-  
+
 SET ARGUMENTS=%1
 SET "ARGUMENTS=%ARGUMENTS:stvef:=%"
 FOR /f "tokens=1,2,3,4 delims=; " %%a IN ("%ARGUMENTS%") DO SET "SERVER_IP=%%a"&SET "SERVER_PORT=%%b"&SET "SERVER_NAME=%%c"&SET "MAP_NAME=%%d"
@@ -56,8 +56,8 @@ FOR /f "tokens=1,2,3,4 delims=; " %%a IN ("%ARGUMENTS%") DO SET "SERVER_IP=%%a"&
     REM     or continue to load Elite Force.  Most of these lines convert any symbols in the server name back into a readable format
     REM     ----- Remove the 'REM' from the line below ('GOTO SKIP_PAUSE') to disable the pause window and go straight into the game.
 
-REM GOTO SKIP_PAUSE 
-    
+REM GOTO SKIP_PAUSE
+
         GOTO SHOW_LOGO
         :PAUSE_BEFORE_LAUNCH
         SETLOCAL ENABLEDELAYEDEXPANSION
@@ -79,7 +79,7 @@ REM GOTO SKIP_PAUSE
 :SKIP_PAUSE
 REM *****************************************************************************************************************************************
 REM     This starts EF with the CONNECT command with the selected server IP and Port
-    START "" /D "%~dp0 " "%ELITE_FORCE_EXECUTABLE%"  +set logfile 2 +CONNECT %SERVER_IP%:%SERVER_PORT%
+    START "" /D "%~dp0 " "%ELITE_FORCE_EXECUTABLE%" +set logfile 2 +CONNECT %SERVER_IP%:%SERVER_PORT%
 EXIT 0
 REM *****************************************************************************************************************************************
 
@@ -127,7 +127,7 @@ GOTO PAUSE_BEFORE_LAUNCH
 :::    | .-'  `. |      Join a game directly from
 :::    |'       `|      The website/webapp!
 ::: [0m
-::: 
-:::  Edit this file to stop from pausing before joining!       
-:::         
+:::
+:::  Edit this file to stop from pausing before joining!
+:::
 REM *****************************************************************************************************************************************
