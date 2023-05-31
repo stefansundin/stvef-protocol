@@ -11,6 +11,12 @@ Be sure to turn on `Auto Downloading` in the game settings.
 
 Note that in Tulip Voyager, the key combination to bring up the console is <kbd>Shift + ~</kbd>.
 
+## Native support
+
+If you are using a game client with native support then you don't need to download anything. The links should work after you move the `.app` to `/Applications/`.
+
+If your favorite game client has not merged support yet then feel free to use [my test build](https://github.com/stefansundin/elite-force/releases/tag/lilium-protocol-handler-v1).
+
 ## Install stvef-protocol
 
 [You can download the app from the releases section.](https://github.com/stefansundin/stvef-protocol/releases/latest)
@@ -19,7 +25,7 @@ Note that in Tulip Voyager, the key combination to bring up the console is <kbd>
 
 To build and install, run:
 
-```
+```shell
 git clone https://github.com/stefansundin/stvef-protocol.git
 cd stvef-protocol/mac
 ./build.sh
