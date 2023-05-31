@@ -6,8 +6,8 @@ elif [[ -x "$HOME/Downloads/release-linux-x86_64/tulipvoyhm.x86_64" ]]; then
   EXECUTABLE="$HOME/Downloads/release-linux-x86_64/tulipvoyhm.x86_64"
 elif [[ -x "$HOME/Downloads/liliumvoyager-1.40-linux/liliumvoyhm.x86_64" ]]; then
   EXECUTABLE="$HOME/Downloads/liliumvoyager-1.40-linux/liliumvoyhm.x86_64"
-elif [[ -x "$HOME/Downloads/ioEF-cMod_v1.17_linux_x86_64/ioEF-cMod.x86_64" ]]; then
-  EXECUTABLE="$HOME/Downloads/ioEF-cMod_v1.17_linux_x86_64/ioEF-cMod.x86_64"
+elif [[ -x "$HOME/Downloads/ioEF-cMod_v1.27_linux_x86_64/ioEF-cMod.x86_64" ]]; then
+  EXECUTABLE="$HOME/Downloads/ioEF-cMod_v1.27_linux_x86_64/ioEF-cMod.x86_64"
 elif [[ -x "$HOME/.wine/drive_c/Program Files (x86)/Raven/Star Trek Voyager Elite Force/stvoyHM.exe" ]]; then
   EXECUTABLE="$HOME/.wine/drive_c/Program Files (x86)/Raven/Star Trek Voyager Elite Force/stvoyHM.exe"
   RUNNER=wine
