@@ -28,9 +28,15 @@ else
   exit 1
 fi
 
+# Remove extra data
+if [[ "$arg" == *"?"* ]]; then
+  arg="${arg%\?*}"
+fi
+
 if [[ "$arg" == "connect/"* ]]; then
   SERVER="${arg:8}"
 else
+  # Legacy format
   # Example arg: 74.91.116.133;27961;BeerGardenSuperFFAv;hm_noon;0;
   IFS=';' read -r SERVER_IP SERVER_PORT SERVER_NAME MAP_NAME REST <<< "$arg"
   SERVER="$SERVER_IP:$SERVER_PORT"

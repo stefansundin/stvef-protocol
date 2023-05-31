@@ -29,6 +29,12 @@
     return;
   }
 
+  // Remove extra data
+  if ([arg containsString:@"?"]) {
+    NSRange questionMark = [arg rangeOfString:@"?"];
+    arg = [arg substringToIndex:questionMark.location];
+  }
+
   // Parse arg
   // TODO: Maybe validate the input a bit better
   NSString *server;
@@ -36,6 +42,7 @@
     server = [arg substringFromIndex:8];
   }
   else {
+    // Legacy format
     NSArray *args = [arg componentsSeparatedByString:@";"];
     server = [NSString stringWithFormat: @"%@:%@", args[0], args[1]];
   }
